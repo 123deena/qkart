@@ -203,7 +203,7 @@ const Register = () => {
             helperText="Password must be atleast 6 characters length"
             fullWidth
             placeholder="Enter a password with minimum 6 characters"
-            onChange={function(event)
+            onchange={function(event)
               {
                 handlevalue(event,"password")
               }}
