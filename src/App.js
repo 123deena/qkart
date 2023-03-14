@@ -24,7 +24,7 @@ function App() {
               <Login />
             </Route>
 
-            <Route path="/products">
+            <Route path="/">
               <Products />
             </Route>
 
