@@ -7,7 +7,8 @@ import { config } from "../App";
 import Footer from "./Footer";
 import Header from "./Header";
 import "./Register.css";
-
+import {Link} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -20,6 +21,7 @@ const Register = () => {
   // const [password,setpassword] = useState("");
   // const [confirmPassword,setconfirmpassword] = useState("");
   const [loading,setloading] = useState(false);
+  const history = useHistory();
  
 
 
@@ -71,6 +73,7 @@ const Register = () => {
       if(response.status === 201){
       enqueueSnackbar("Registered successfully",{variant:'success'})
       //alert("success");
+      history.push("/login")
     }
 
 
@@ -203,7 +206,7 @@ const Register = () => {
             helperText="Password must be atleast 6 characters length"
             fullWidth
             placeholder="Enter a password with minimum 6 characters"
-            onchange={function(event)
+            onChange={function(event)
               {
                 handlevalue(event,"password")
               }}
@@ -228,9 +231,9 @@ const Register = () => {
            </div>
           <p className="secondary-action">
             Already have an account?{" "}
-             <a className="link" href="#">
+             <Link to="/login" className="link">
               Login here
-             </a>
+             </Link>
           </p>
         </Stack>
       </Box>
