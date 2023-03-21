@@ -90,6 +90,16 @@ export const getTotalCartValue = (items = []) => {
   return totalCost;
 };
 
+export const getTotalItems = (items = []) => {
+
+  let totalCost = 0;
+  for(let item of items)
+  {
+    totalCost+=item.qty;
+  }
+  return totalCost;
+};
+
 /**
  * Component to display the current quantity for a product and + and - buttons to update product quantity on cart
  *
@@ -104,7 +114,8 @@ export const getTotalCartValue = (items = []) => {
  *
  *
  */
-const ItemQuantity = ({ value, handleAdd, handleDelete }) => {
+const ItemQuantity = ({ value, handleAdd, handleDelete}) => {
+  
   return (
     <Stack direction="row" alignItems="center">
       <IconButton size="small" color="primary" onClick={handleDelete}>
@@ -134,7 +145,7 @@ const ItemQuantity = ({ value, handleAdd, handleDelete }) => {
  *
  *
  */
-const Cart = ({ products, items = [], handleQuantity }) => {
+const Cart = ({ products, items = [], handleQuantity,isReadOnly}) => {
   const history = useHistory();
 
   if (!items.length) {
@@ -192,12 +203,15 @@ const Cart = ({ products, items = [], handleQuantity }) => {
                   justifyContent="space-between"
                   alignItems="center"
                 >
+                  {!isReadOnly?
                   <ItemQuantity
                   // Add required props by checking implementation
                   value={product.qty}  
                   handleAdd={()=>handleAdd(product.productId,product.qty+1)}
                   handleDelete={()=>handleDelete(product.productId,product.qty-1)}
-                  />
+                  />:
+                  <Box>Qty:{product.qty}</Box>}
+
                   <Box padding="0.5rem" fontWeight="700">
                   ${product.cost}
                   </Box>
@@ -226,6 +240,8 @@ const Cart = ({ products, items = [], handleQuantity }) => {
             ${getTotalCartValue(items)}
           </Box>
         </Box>
+        {isReadOnly?
+        <></>:
         <Box display="flex" justifyContent="flex-end" className="cart-footer">
           <Button
             color="primary"
@@ -236,7 +252,7 @@ const Cart = ({ products, items = [], handleQuantity }) => {
           >
             Checkout
           </Button>
-        </Box>
+        </Box>}
       </Box>
     </>
   );

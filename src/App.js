@@ -7,6 +7,7 @@ import theme from "./theme";
 import {Route,Switch} from "react-router-dom";
 import Products from "./components/Products"
 import Checkout from "./components/Checkout";
+import Thanks from "./components/Thanks";
 
 export const config = {
   endpoint: `http://${ipConfig.workspaceIp}:8082/api/v1`,
@@ -18,18 +19,22 @@ function App() {
       <Switch>
           
           <ThemeProvider theme={theme}>
-            <Route path="/register">
+            <Route exact path="/register">
               <Register />
             </Route>
-            <Route path="/login">
+            <Route exact path="/login">
               <Login />
             </Route>
                         
-            <Route path="/checkout">
+            <Route exact path="/checkout">
               <Checkout />
             </Route>
 
-            <Route path="/">
+            <Route exact path="/thanks">
+              <Thanks />
+            </Route>
+
+            <Route exact path="/">
               <Products />
             </Route>
 
