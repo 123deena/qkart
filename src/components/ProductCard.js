@@ -18,14 +18,15 @@ const ProductCard = ({ product, handleAddToCart }) => {
         <img src={product.image} alt={product.name} height={250} />
         </CardMedia>
       <CardContent>
-        <Typography><p>{product.name}</p></Typography>
+        <Typography>{product.name}</Typography>
         <Typography>
-          <p>${product.cost}</p>
+          ${product.cost}
         </Typography>
         <Rating name="simple-controlled" value={product.rating} readOnly />
         <Typography>
-          <Button className="card-button" variant="contained">
+          <Button className="card-button" variant="contained" onClick={handleAddToCart}>
             <AddShoppingCartOutlined /> ADD TO CART
+
           </Button>
         </Typography>
       </CardContent>
